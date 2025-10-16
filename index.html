@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%23667eea;stop-opacity:1' /><stop offset='100%' style='stop-color:%23764ba2;stop-opacity:1' /></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23grad)' stroke='%23ffffff' stroke-width='3'/><text x='50' y='60' font-family='Arial,sans-serif' font-size='35' font-weight='bold' text-anchor='middle' fill='white'>⚖️</text></svg>" />
+    <title>⚖️ eCourts Legal Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="ashoka" width="200" height="200" patternUnits="userSpaceOnUse"><circle cx="100" cy="100" r="80" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.05"/><circle cx="100" cy="100" r="60" fill="none" stroke="%23d4af37" stroke-width="0.3" opacity="0.08"/><circle cx="100" cy="100" r="40" fill="none" stroke="%23ffffff" stroke-width="0.3" opacity="0.05"/></pattern></defs><rect width="200" height="200" fill="url(%23ashoka)"/></svg>') repeat;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .panel {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(26, 54, 93, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 4px;
+            box-shadow: inset 0 2px 4px rgba(26, 54, 93, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 16px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            color: #2d3748;
+            border-radius: 6px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .tab:hover {
+            color: #1a365d;
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(26, 54, 93, 0.1);
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1a365d;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2), 0 4px 12px rgba(26, 54, 93, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            padding: 16px 32px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(26, 54, 93, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 54, 93, 0.4);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .result h4 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .result p {
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .hidden { display: none; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px 15px; }
+            .panel { padding: 25px; }
+            .tabs { flex-direction: column; }
+            .tab { margin-bottom: 2px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%); padding: 20px 0; border-bottom: 4px solid #d4af37; box-shadow: 0 4px 20px rgba(0,0,0,0.3); position: relative; margin: -40px -20px 40px -20px;">
+            <div style="position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, #ff9933 33%, #ffffff 33%, #ffffff 66%, #138808 66%);"></div>
+            <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: center; gap: 20px;">
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #d4af37 0%, #f6e05e 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4); border: 3px solid rgba(255,255,255,0.3);">⚖️</div>
+                <div style="text-align: left; color: white;">
+                    <h1 style="font-size: 2.8rem; font-weight: 700; margin-bottom: 5px; text-shadow: 0 4px 20px rgba(0,0,0,0.3); letter-spacing: -0.02em;">eCourts Legal Services</h1>
+                    <div style="font-size: 1.1rem; font-weight: 500; color: #d4af37; margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">Government of India</div>
+                    <div style="font-size: 1rem; font-weight: 300; opacity: 0.9; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">Ministry of Law & Justice | Department of Justice</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('cnr')">CNR Search</button>
+                <button class="tab" onclick="showTab('case')">Case Details</button>
+                <button class="tab" onclick="showTab('causelist')">Cause List</button>
+            </div>
+            
+            <div id="cnr-tab">
+                <h3>Search by CNR Number</h3>
+                <form onsubmit="searchCNR(event)">
+                    <div class="form-group">
+                        <label>CNR Number:</label>
+                        <input type="text" id="cnr" placeholder="Enter CNR Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <select id="cnr-date">
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Search Case</button>
+                </form>
+            </div>
+            
+            <div id="case-tab" class="hidden">
+                <h3>Search by Case Details</h3>
+                <form onsubmit="searchCase(event)">
+                    <div class="form-group">
+                        <label>Case Type:</label>
+                        <input type="text" id="case-type" placeholder="e.g., CRL.A" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Case Number:</label>
+                        <input type="text" id="case-number" placeholder="e.g., 123" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Year:</label>
+                        <input type="text" id="case-year" placeholder="e.g., 2024" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <select id="case-date">
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Search Case</button>
+                </form>
+            </div>
+            
+            <div id="causelist-tab" class="hidden">
+                <h3>Download Cause List</h3>
+                <p>Get today's complete cause list</p>
+                <button onclick="getCauseList()" class="btn">📄 Download Cause List</button>
+            </div>
+            
+            <div id="result" class="result hidden">
+                <h4 style="color: orange;">⚠️ Demo Mode</h4>
+                <p>This is a demonstration of the eCourts Legal Services interface. The search functionality requires a backend server to connect to the eCourts database.</p>
+                <p><strong>To use full functionality:</strong> Run the Python Flask backend locally.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('[id$="-tab"]').forEach(t => t.classList.add('hidden'));
+            event.target.classList.add('active');
+            document.getElementById(tab + '-tab').classList.remove('hidden');
+        }
+
+        function searchCNR(event) {
+            event.preventDefault();
+            showDemoMessage();
+        }
+
+        function searchCase(event) {
+            event.preventDefault();
+            showDemoMessage();
+        }
+
+        function getCauseList() {
+            showDemoMessage();
+        }
+
+        function showDemoMessage() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.innerHTML = `
+                <h4 style="color: #1a365d;">🏛️ Government eCourts Legal Services</h4>
+                <p><strong>Professional Interface:</strong> This demonstrates the official Government of India eCourts portal design.</p>
+                <p><strong>Features:</strong> CNR Search, Case Details Search, and Cause List Download.</p>
+                <p><strong>Note:</strong> Full functionality requires backend server connection to eCourts database.</p>
+                <div style="margin-top: 15px; padding: 15px; background: rgba(26, 54, 93, 0.1); border-radius: 8px;">
+                    <strong>🔧 For Developers:</strong> Run the Flask backend locally to enable live eCourts data search.
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
